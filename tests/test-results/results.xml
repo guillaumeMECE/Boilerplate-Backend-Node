@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Switlish-Backend" tests="1" failures="0" time="2.646">
+  <testsuite name="[Tests] - MongooseCheckConnection" errors="0" failures="0" skipped="0" timestamp="2019-08-26T16:59:21" time="2.147" tests="1">
+    <testcase classname="[Tests] - MongooseCheckConnection Case 0: Check connection state to mongoose should be connected to mongo (1)" name="[Tests] - MongooseCheckConnection Case 0: Check connection state to mongoose should be connected to mongo (1)" time="0.014">
+    </testcase>
+  </testsuite>
+</testsuites>
