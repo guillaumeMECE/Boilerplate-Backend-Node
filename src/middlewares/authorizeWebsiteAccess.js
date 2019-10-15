@@ -1,4 +1,4 @@
-const RigorousError = require('../core/errors/RigorousError');
+const CustomError = require('../core/errors/CustomError');
 const errorsMessages = require('../core/errors/errorsMessages');
 
 const { ClientWebsite } = require('$models');
@@ -12,9 +12,9 @@ module.exports = async (req, res, next) => {
         if (clientWebsite) {
             next();
         } else {
-            res.status(500).json({ error: new RigorousError(errorsMessages.AccessDeclinedError) });
+            res.status(500).json({ error: new CustomError(errorsMessages.AccessDeclinedError) });
         }
     } catch (error) {
-        res.status(500).json({ error: new RigorousError(errorsMessages.MongoDBError, error) });
+        res.status(500).json({ error: new CustomError(errorsMessages.MongoDBError, error) });
     }
 };

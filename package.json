@@ -1,7 +1,7 @@
 {
-  "name": "backend_app",
+  "name": "boilerplate-backend-node",
   "version": "2.0.1",
-  "description": "Backend Switlish",
+  "description": "Boilerplate for a Back in NodeJS",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
@@ -38,9 +38,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.com/persLaunch2/switlish-temporary-stat.git"
+    "url": "https://gitlab.com/....."
   },
-  "author": "Vincent XXX",
+  "author": "....",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.4.3",

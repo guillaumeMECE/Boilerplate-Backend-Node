@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-const RigorousError = require('../errors/RigorousError');
+const CustomError = require('../errors/CustomError');
 const errorsMessages = require('../errors/errorsMessages');
 
 /**
@@ -18,7 +18,7 @@ module.exports = {
             const value = Number.parseFloat(element.value, 10);
 
             if (Number.isNaN(value)) {
-                throw new RigorousError(errorsMessages.InvalidDatasetElementValueError);
+                throw new CustomError(errorsMessages.InvalidDatasetElementValueError);
             } else {
                 total += value;
             }

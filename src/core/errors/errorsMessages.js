@@ -22,50 +22,6 @@ module.exports = {
             dev: 'RigorousRouterMalformed',
             prod: '',
         },
-        RigorousModelMalformed: {
-            dev: 'RigorousModelMalformed',
-            prod: '',
-            FilterMissing: {
-                dev: 'FilterMissing',
-                prod: '',
-            },
-            UpdatableMissing: {
-                dev: 'UpdatableMissing',
-                prod: '',
-            },
-            OptionalOnCreateMissing: {
-                dev: 'OptionalOnCreateMissing',
-                prod: '',
-            },
-            DefineOnCreateMissing: {
-                dev: 'DefineOnCreateMissing',
-                prod: '',
-            },
-            PrimaryKeyMissing: {
-                dev: 'PrimaryKeyMissing',
-                prod: '',
-            },
-        },
-        NotCoreAttribute: {
-            dev: 'DevelopperError.NotCoreAttribute',
-            prod: '',
-            withAttribute: (modelName) => {
-                return {
-                    dev: `DevelopperError.NotCoreAttribute.${modelName}`,
-                    prod: `DevelopperError.NotCoreAttribute.${modelName}`,
-                };
-            },
-        },
-        NotUpdatableAttribute: {
-            dev: 'DevelopperError.NotUpdatableAttribute',
-            prod: '',
-            withAttribute: (modelName) => {
-                return {
-                    dev: `DevelopperError.NotCoreAttribute.${modelName}`,
-                    prod: `DevelopperError.NotCoreAttribute.${modelName}`,
-                };
-            },
-        },
     },
     ServiceError: {
         dev: 'ServiceError',

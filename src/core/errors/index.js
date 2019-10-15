@@ -2,5 +2,5 @@
 
 module.exports = {
     errorsMessages: require('./errorsMessages'),
-    RigorousError: require('./RigorousError')
+    CustomError: require('./CustomError')
 };

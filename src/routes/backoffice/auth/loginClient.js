@@ -1,4 +1,4 @@
-const { formatChecker, secureInput, RigorousRoute, RigorousError } = require('$core/index');
+const { formatChecker, secureInput, RigorousRoute, CustomError } = require('$core/index');
 
 const errorsMessages = require('$root/etc/errorsMessages');
 
@@ -20,7 +20,7 @@ class Route extends RigorousRoute {
             };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -31,13 +31,13 @@ class Route extends RigorousRoute {
             const token = await Auth.login(email, password);
 
             if (formatChecker.isNil(token)) {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
             return { token };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 

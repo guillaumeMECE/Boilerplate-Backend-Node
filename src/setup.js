@@ -5,7 +5,7 @@ const passport = require('passport');
 
 const { localStrategy, jwtStrategy } = require('$core/index');
 
-const { RigorousError } = require('$core/index');
+const { CustomError } = require('$core/index');
 const { rigorousRouter } = require('$core/index');
 const { moduleMongoose } = require('$core/index');
 
@@ -36,7 +36,7 @@ function setupSessionEnvironment(app) {
         sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: false, httpOnly: true };
         break;
     default:
-        throw new RigorousError(EnvironmentError);
+        throw new CustomError(EnvironmentError);
     }
 
     app.use(cookieSession(sess));

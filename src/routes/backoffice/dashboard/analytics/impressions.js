@@ -1,5 +1,5 @@
 const { RigorousRoute, authorizeClient } = require('$core/index');
-const { RigorousError, errorsMessages } = require('$core/errors');
+const { CustomError, errorsMessages } = require('$core/errors');
 
 const GoogleAnalyticsReporting = require('$core/modules/GoogleAnalyticsReporting');
 
@@ -41,7 +41,7 @@ class Route extends RigorousRoute {
             .exec();
 
         if (this.website === null) {
-            throw new RigorousError(errorsMessages.InexistentWebsiteError);
+            throw new CustomError(errorsMessages.InexistentWebsiteError);
         }
 
         this.GoogleAnalyticsPeriod = GoogleAnalyticsHelper.formatPeriod(this.period, this.timezone);

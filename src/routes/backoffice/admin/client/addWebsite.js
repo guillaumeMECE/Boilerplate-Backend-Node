@@ -1,4 +1,4 @@
-const { RigorousRoute, RigorousError, OperationParams, authorizeClient, secureInput } = require('$core/index');
+const { RigorousRoute, CustomError, OperationParams, authorizeClient, secureInput } = require('$core/index');
 const errorsMessages = require('$root/etc/errorsMessages');
 const isClientAdmin = require('$middlewares/isClientAdmin');
 
@@ -29,7 +29,7 @@ class Route extends RigorousRoute {
             };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -42,7 +42,7 @@ class Route extends RigorousRoute {
             return clientWebsite;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 }

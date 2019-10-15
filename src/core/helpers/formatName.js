@@ -1,13 +1,13 @@
 const uniqid = require('uniqid');
 
-const { RigorousError, errorsMessages } = require('../errors/index');
+const { CustomError, errorsMessages } = require('../errors/index');
 
 
 function capitalizeFirstLetter(string) {
     try {
         return string.charAt(0).toUpperCase() + string.slice(1);
     } catch (err) {
-        throw new RigorousError(errorsMessages.InputError);
+        throw new CustomError(errorsMessages.InputError);
     }
 }
 
@@ -17,7 +17,7 @@ module.exports = {
 
         if (!firstname || !lastname) {
 
-            throw new RigorousError(errorsMessages.InputError.NullValue);
+            throw new CustomError(errorsMessages.InputError.NullValue);
         }
 
         try {

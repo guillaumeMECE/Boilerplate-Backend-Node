@@ -1,8 +1,8 @@
-const { RigorousError, errorsMessages } = require('../errors/index');
+const { CustomError, errorsMessages } = require('../errors/index');
 const formatChecker = require('./formatChecker');
 
 
-function secure(unitTextRaw, optional = false) {
+const secure = (unitTextRaw, optional = false) => {
 
     const map = {
         '&': '&amp;',
@@ -14,7 +14,7 @@ function secure(unitTextRaw, optional = false) {
 
     if (!unitTextRaw) {
         if (!optional) {
-            throw new RigorousError(errorsMessages.UndefinedParameterInputError);
+            throw new CustomError(errorsMessages.UndefinedParameterInputError);
         } else {
             return null;
         }
@@ -24,14 +24,14 @@ function secure(unitTextRaw, optional = false) {
 
 }
 
-function sanitizeString(unitTextRaw, optional = false)  {
+const sanitizeString = (unitTextRaw, optional = false) => {
 
     let result = null;
 
     if (Array.isArray(unitTextRaw)) {
 
         result = [];
-        
+
         unitTextRaw.forEach((input) => {
             result.push(secure(input, optional));
         });
@@ -44,79 +44,88 @@ function sanitizeString(unitTextRaw, optional = false)  {
     return result;
 }
 
-function sanitizeUrl(unitTextRaw, optional = false)  {
+const sanitizeUrl = (unitTextRaw, optional = false) => {
 
     const result = sanitizeString(unitTextRaw);
-    
+
     if (result.indexOf('.') === -1) {
-        throw new RigorousError(errorsMessages.DataNotConform);
-        
+        throw new CustomError(errorsMessages.DataNotConform);
+
     }
 
     return result;
 }
 
-function sanitizeNumber(number, optional = false) {
+const sanitizeNumber = (number, optional = false) => {
 
     let result = null;
 
     if (Number.isInteger(number)) {
         result = number;
     } else if (!optional) {
-        throw new RigorousError(errorsMessages.UndefinedParameterInputError);
+        throw new CustomError(errorsMessages.UndefinedParameterInputError);
     }
 
     return result;
 }
+
+const secureName = (param, paramName, validator) => {
+
+    const result = sanitizeString(param);
+
+    if (!validator(result)) {
+        throw new CustomError(errorsMessages.DataNotConform.withAttribute(paramName));
+    }
+
+    return result;
+}
+
+const secureEmail = (param) => {
+
+    const result = sanitizeString(param);
+
+    if (!formatChecker.isEmail(result)) {
+        throw new CustomError(errorsMessages.DataNotConform.withAttribute('email'));
+    }
+
+    return result.toLowerCase();
+}
+
+const securePassword = (param) => {
+
+    const result = sanitizeString(param);
+
+    if (!formatChecker.isPassword(result)) {
+        throw new CustomError(errorsMessages.DataNotConform.withAttribute('password'));
+    }
+
+    return result;
+}
+
+const secureBirthdate = (param, optional) => {
+
+    const result = sanitizeNumber(param, optional);
+
+    if (result && !formatChecker.isBirthdate(result)) {
+        throw new CustomError(errorsMessages.DataNotConform.withAttribute('birthdate'));
+    }
+
+    return result;
+}
+
 module.exports = {
-    
+
     sanitizeUrl,
 
     sanitizeString,
 
     sanitizeNumber,
 
-    secureName: (param, paramName, validator) => {
-        
-        const result = sanitizeString(param);
+    secureName,
 
-        if (!validator(result)) {
-            throw new RigorousError(errorsMessages.DataNotConform.withAttribute(paramName));
-        }
+    secureEmail,
 
-        return result;
-    },
+    securePassword,
 
-    secureEmail: (param) => {
-        
-        const result = sanitizeString(param);
-
-        if (!formatChecker.isEmail(result)) {
-            throw new RigorousError(errorsMessages.DataNotConform.withAttribute('email'));
-        }
-
-        return result.toLowerCase();
-    },
-
-    securePassword: (param) => {
-        
-        const result = sanitizeString(param);
-
-        if (!formatChecker.isPassword(result)) {
-            throw new RigorousError(errorsMessages.DataNotConform.withAttribute('password'));
-        }
-
-        return result;
-    },
-
-    secureBirthdate: (param, optional) => {
-        
-        const result = sanitizeNumber(param, optional);
-
-        if (result && !formatChecker.isBirthdate(result)) {
-            throw new RigorousError(errorsMessages.DataNotConform.withAttribute('birthdate'));
-        }
-
-        return result;
-    }
+    secureBirthdate,
 };

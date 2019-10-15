@@ -1,4 +1,4 @@
-const { DeleteManyRoute, RigorousError, authorizeClient, secureInput } = require('$core/index');
+const { DeleteManyRoute, CustomError, authorizeClient, secureInput } = require('$core/index');
 const errorsMessages = require('$root/etc/errorsMessages');
 const isClientAdmin = require('$middlewares/isClientAdmin');
 
@@ -26,7 +26,7 @@ class Route extends DeleteManyRoute {
             this.inputs.client_id = client._id;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -48,7 +48,7 @@ class Route extends DeleteManyRoute {
             return null;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 }

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('$root/config');
-const { RigorousError, errorsMessages } = require('$core');
+const { CustomError, errorsMessages } = require('$core');
 
 /**
  * Smart Efficient Pagination: https://arpitbhayani.me/techie/fast-and-efficient-pagination-in-mongodb.html
@@ -79,7 +79,7 @@ async function createQueryWithPagination(modelName, query, lastPaginateId, dateF
     const queryFindAfterThisObject = { ...query };
     
     if (!objectTargeted) {
-        throw new RigorousError(errorsMessages.DataNotConform);
+        throw new CustomError(errorsMessages.DataNotConform);
     }
 
     queryFindAfterThisObject[dateField] = {
@@ -129,7 +129,7 @@ class ClassModel {
             return result;
 
         } catch (error) {
-            throw new RigorousError(errorsMessages.OperationError.ReadMany, error);
+            throw new CustomError(errorsMessages.OperationError.ReadMany, error);
         }
     }
 }

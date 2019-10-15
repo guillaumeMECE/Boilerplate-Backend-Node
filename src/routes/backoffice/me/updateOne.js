@@ -1,4 +1,4 @@
-const { authorizeClient, RigorousError, RigorousRoute, secureInput, formatChecker, OperationParams } = require('$core/index');
+const { authorizeClient, CustomError, RigorousRoute, secureInput, formatChecker, OperationParams } = require('$core/index');
 
 const errorsMessages = require('$root/etc/errorsMessages');
 
@@ -23,7 +23,7 @@ class Route extends RigorousRoute {
             };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -42,7 +42,7 @@ class Route extends RigorousRoute {
             return null;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 }

@@ -1,6 +1,6 @@
 const uniqid = require('uniqid');
 
-module.exports = class RigorousError extends Error {
+module.exports = class CustomError extends Error {
 
     constructor(errorName, detailError = null) {
         super();

@@ -3,7 +3,7 @@ const uniqid = require('uniqid');
 const errorsMessages = require('$root/etc/errorsMessages');
 
 const {
-    RigorousError,
+    CustomError,
     formatChecker,
     secureInput,
     RigorousRoute,
@@ -31,7 +31,7 @@ class Route extends RigorousRoute {
             };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -63,7 +63,7 @@ class Route extends RigorousRoute {
             console.log(client);
 
             if (formatChecker.isNil(client)) {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
             console.log('test OK');
@@ -76,19 +76,19 @@ class Route extends RigorousRoute {
             });
 
             if (formatChecker.isNil(cred)) {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
             const token = await Auth.generateTokenAuth(cred);
 
             if (formatChecker.isNil(token)) {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
             return token;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 }

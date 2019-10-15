@@ -1,4 +1,4 @@
-const { RigorousRoute, RigorousError, OperationParams, authorizeClient } = require('$core/index');
+const { RigorousRoute, CustomError, OperationParams, authorizeClient } = require('$core/index');
 const { formatChecker } = require('$core/index');
 
 const errorsMessages = require('$root/etc/errorsMessages');
@@ -20,7 +20,7 @@ class Route extends RigorousRoute {
             this.userIdAsking = req.rigorous.user.id;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -29,7 +29,7 @@ class Route extends RigorousRoute {
             const client = await Client.findById(this.userIdAsking).exec();
 
             if (formatChecker.isNil(client)) {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
             client.last_connection_at = new Date();
@@ -39,7 +39,7 @@ class Route extends RigorousRoute {
             return result;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 

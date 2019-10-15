@@ -2,7 +2,7 @@ const _ = require('lodash');
 
 const isClientAdmin = require('$middlewares/isClientAdmin');
 const errorsMessages = require('$root/etc/errorsMessages');
-const { ReadAllRoute, RigorousRoute, RigorousError, authorizeClient } = require('$core');
+const { ReadAllRoute, RigorousRoute, CustomError, authorizeClient } = require('$core');
 
 const { Blacklistruleuser } = require('$models');
 
@@ -33,7 +33,7 @@ class Route extends ReadAllRoute {
             return rules;
 
         } catch (error) {
-            throw new RigorousError(errorsMessages.RouteError, error);
+            throw new CustomError(errorsMessages.RouteError, error);
         }
     }
 }

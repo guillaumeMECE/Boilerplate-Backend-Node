@@ -4,7 +4,7 @@ module.exports = {
 
     // Errors
     errorsMessages: require('./errors/errorsMessages'),
-    RigorousError: require('./errors/RigorousError'),
+    CustomError: require('./errors/CustomError'),
 
     // Helpers
     formatChecker: require('./helpers/formatChecker'),

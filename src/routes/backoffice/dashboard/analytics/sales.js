@@ -1,5 +1,5 @@
 const { RigorousRoute, authorizeClient } = require('$core/index');
-const { RigorousError, errorsMessages } = require('$core/errors');
+const { CustomError, errorsMessages } = require('$core/errors');
 
 const GoogleAnalyticsReporting = require('$core/modules/GoogleAnalyticsReporting');
 
@@ -39,12 +39,12 @@ class Route extends RigorousRoute {
             .exec();
 
         if (this.website === null) {
-            throw new RigorousError(errorsMessages.InexistentWebsiteError);
+            throw new CustomError(errorsMessages.InexistentWebsiteError);
         }
 
         // Specific check to Google Analytics routes
         if (this.website.ga_view_id === undefined || this.website.ga_view_id === null) {
-            throw new RigorousError(errorsMessages.NoWebsiteGAViewError);
+            throw new CustomError(errorsMessages.NoWebsiteGAViewError);
         }
 
         this.GoogleAnalyticsPeriod = GoogleAnalyticsHelper.formatPeriod(this.period, this.timezone);

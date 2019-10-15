@@ -1,6 +1,6 @@
 const errorsMessages = require('$root/etc/errorsMessages');
 
-const { RigorousError } = require('$core');
+const { CustomError } = require('$core');
 
 const { Auth } = require('$models');
 
@@ -9,7 +9,7 @@ module.exports = async (email, password, done) => {
         const authUser = await Auth.findOne({ email }).select('email password user_id type').exec();
 
         if (authUser && !authUser.comparePassword(password)) {
-            throw new RigorousError(errorsMessages.InvalidCredentials);
+            throw new CustomError(errorsMessages.InvalidCredentials);
         }
 
         done(null, authUser);

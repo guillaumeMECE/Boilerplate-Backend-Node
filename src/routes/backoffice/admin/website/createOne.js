@@ -1,4 +1,4 @@
-const { authorizeClient, RigorousRoute, RigorousError, secureInput } = require('$core/index');
+const { authorizeClient, RigorousRoute, CustomError, secureInput } = require('$core/index');
 const isClientAdmin = require('$middlewares/isClientAdmin');
 
 const errorsMessages = require('$root/etc/errorsMessages');
@@ -28,7 +28,7 @@ class Route extends RigorousRoute {
             };
             console.log('inputs ', this.inputs);
 
-        } catch (err) { console.log('azfazf ', err); throw new RigorousError(errorsMessages.RouteError, err); }
+        } catch (err) { console.log('azfazf ', err); throw new CustomError(errorsMessages.RouteError, err); }
     }
 
     async process() {
@@ -40,7 +40,7 @@ class Route extends RigorousRoute {
             return website;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 

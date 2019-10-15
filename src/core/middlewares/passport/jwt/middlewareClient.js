@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const { errorsMessages, RigorousError } = require('../../../errors/index');
+const { errorsMessages, CustomError } = require('../../../errors/index');
 
 module.exports = {
 
@@ -20,7 +20,7 @@ module.exports = {
                     next();
                 } else {
 
-                    res.status(401).json({ error: new RigorousError(errorsMessages.TokenError), created_at: new Date() });
+                    res.status(401).json({ error: new CustomError(errorsMessages.TokenError), created_at: new Date() });
                 }
         
             })(req, res, next);

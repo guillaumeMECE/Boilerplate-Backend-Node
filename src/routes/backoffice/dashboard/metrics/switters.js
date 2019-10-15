@@ -1,5 +1,5 @@
 const { RigorousRoute, authorizeClient } = require('$core/index');
-const { RigorousError, errorsMessages } = require('$core/errors');
+const { CustomError, errorsMessages } = require('$core/errors');
 
 const GoogleAnalyticsReporting = require('$core/modules/GoogleAnalyticsReporting');
 
@@ -47,7 +47,7 @@ class Route extends RigorousRoute {
             .exec();
 
         if (this.website === null) {
-            throw new RigorousError(errorsMessages.InexistentWebsiteError);
+            throw new CustomError(errorsMessages.InexistentWebsiteError);
         }
 
         this.articles = await Article.distinct('_id')
@@ -55,7 +55,7 @@ class Route extends RigorousRoute {
             .exec();
 
         if (!this.articles.length) {
-            throw new RigorousError(errorsMessages.NoArticlesToSellError);
+            throw new CustomError(errorsMessages.NoArticlesToSellError);
         }
 
         this.blacklistedUsers = req.blacklistedUsersIds;

@@ -1,6 +1,6 @@
 const passport = require('passport');
 
-const { RigorousError } = require('$core');
+const { CustomError } = require('$core');
 
 const errorsMessages = require('$root/etc/errorsMessages');
 
@@ -21,11 +21,11 @@ module.exports = {
                         const user = await User.findById(rigorous.id).select('role').exec();
 
                         if (user.role === 'anonymous') {
-                            throw new RigorousError(errorsMessages.RefuseAnonymous);
+                            throw new CustomError(errorsMessages.RefuseAnonymous);
                         }
 
                     } else {
-                        throw new RigorousError(errorsMessages.InvalidToken);
+                        throw new CustomError(errorsMessages.InvalidToken);
                     }
 
                     next();

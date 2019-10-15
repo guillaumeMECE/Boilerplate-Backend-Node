@@ -1,4 +1,4 @@
-const { RigorousRoute, RigorousError, authorizeClient } = require('$core/index');
+const { RigorousRoute, CustomError, authorizeClient } = require('$core/index');
 
 const errorsMessages = require('$root/etc/errorsMessages');
 
@@ -20,7 +20,7 @@ class Route extends RigorousRoute {
             this.authIdToDelete = req.rigorous.auth.id;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -28,7 +28,7 @@ class Route extends RigorousRoute {
         try {
             // None
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -44,11 +44,11 @@ class Route extends RigorousRoute {
 
                 await auth.remove();
             } else {
-                throw new RigorousError(errorsMessages.DataNotConform);
+                throw new CustomError(errorsMessages.DataNotConform);
             }
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 

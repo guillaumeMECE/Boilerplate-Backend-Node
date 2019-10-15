@@ -1,4 +1,4 @@
-const { authorizeClient, ReadAllRoute, RigorousError, secureInput } = require('$core/index');
+const { authorizeClient, ReadAllRoute, CustomError, secureInput } = require('$core/index');
 const isClientAdmin = require('$middlewares/isClientAdmin');
 
 const errorsMessages = require('$root/etc/errorsMessages');
@@ -29,7 +29,7 @@ class Route extends ReadAllRoute {
             this.inputs.client_id = client._id;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -88,7 +88,7 @@ class Route extends ReadAllRoute {
             return result;
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 }

@@ -1,6 +1,6 @@
 import moment from 'moment-timezone';
 
-const RigorousError = require('../errors/RigorousError');
+const CustomError = require('../errors/CustomError');
 const errorsMessages = require('../errors/errorsMessages');
 
 const helperDates = require('./dates');
@@ -11,9 +11,9 @@ module.exports = {
         const timezone = req.header('Timezone');
 
         if (!timezone) {
-            throw new RigorousError(errorsMessages.MissingTimezoneHeaderError);
+            throw new CustomError(errorsMessages.MissingTimezoneHeaderError);
         } else if (moment.tz.zone(timezone) === null) {
-            throw new RigorousError(errorsMessages.InvalidTimezoneHeaderError);
+            throw new CustomError(errorsMessages.InvalidTimezoneHeaderError);
         }
 
         return timezone;

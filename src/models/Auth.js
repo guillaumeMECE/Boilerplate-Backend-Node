@@ -7,7 +7,7 @@ const appConfig = require('$root/config');
 const ClassModel = require('$core/models/ClassModel');
 
 const errorsMessages = require('$root/etc/errorsMessages');
-const { RigorousError } = require('$core');
+const { CustomError } = require('$core');
 
 const { isNotNull, isUnique, isEmail } = require('$validators');
 
@@ -104,7 +104,7 @@ schema.statics.generateTokenAuth = function (cred) {
 
         } catch (err) {
             console.log(err);
-            return reject(new RigorousError(errorsMessages.AuthenticateError, err));
+            return reject(new CustomError(errorsMessages.AuthenticateError, err));
         }
     });
 };
@@ -121,11 +121,11 @@ schema.statics.login = function (email, password) {
 
                 if (err) {
                     console.log('err ', err);
-                    return reject(new RigorousError(errorsMessages.AuthenticateError, err));
+                    return reject(new CustomError(errorsMessages.AuthenticateError, err));
                 }
 
                 if (!credResult) {
-                    return reject(new RigorousError(errorsMessages.AuthenticateError.UserNotFound, err));
+                    return reject(new CustomError(errorsMessages.AuthenticateError.UserNotFound, err));
                 }
 
                 const cred = credResult;
@@ -134,7 +134,7 @@ schema.statics.login = function (email, password) {
 
             } catch (errOperation) {
                 console.log(errOperation);
-                return reject(new RigorousError(errorsMessages.AuthenticateError, err));
+                return reject(new CustomError(errorsMessages.AuthenticateError, err));
             }
 
         })({ body: { email, password } });

@@ -1,5 +1,5 @@
 
-const { authorizeClient, RigorousError, RigorousRoute, secureInput, formatChecker } = require('$core');
+const { authorizeClient, CustomError, RigorousRoute, secureInput, formatChecker } = require('$core');
 const errorsMessages = require('$root/etc/errorsMessages');
 
 const isClientAdmin = require('$middlewares/isClientAdmin');
@@ -28,7 +28,7 @@ class Route extends RigorousRoute {
             };
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 
@@ -54,7 +54,7 @@ class Route extends RigorousRoute {
                 const savedClient = await client.save();
                 console.log('client ', savedClient);
             } else {
-                throw new RigorousError(errorsMessages.InexistentClient);
+                throw new CustomError(errorsMessages.InexistentClient);
             }
 
             const auth = await Auth.findOne({ user_id: client_id }).exec();
@@ -70,11 +70,11 @@ class Route extends RigorousRoute {
 
                 const savedAuth = await auth.save();
             } else {
-                throw new RigorousError(errorsMessages.InexistentClient);
+                throw new CustomError(errorsMessages.InexistentClient);
             }
 
         } catch (err) {
-            throw new RigorousError(errorsMessages.RouteError, err);
+            throw new CustomError(errorsMessages.RouteError, err);
         }
     }
 

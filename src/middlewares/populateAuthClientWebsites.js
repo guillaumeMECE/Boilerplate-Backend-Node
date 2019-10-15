@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const { ClientWebsite, Client } = require('$models');
-const { RigorousError, errorsMessages } = require('../core/errors/index');
+const { CustomError, errorsMessages } = require('../core/errors/index');
 
 module.exports = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
         const clientId = req.rigorous.user.id;
 
         if (!(clientId instanceof mongoose.mongo.ObjectID)) {
-            throw new RigorousError(errorsMessages.ClientIdNotExist);
+            throw new CustomError(errorsMessages.ClientIdNotExist);
         }
 
         const client = await Client
@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
             .exec();
 
         if (!client) {
-            throw new RigorousError(errorsMessages.ClientIdNotExist);
+            throw new CustomError(errorsMessages.ClientIdNotExist);
         }
 
         const result = await ClientWebsite.distinct('website_id', { client_id: client.id }).exec();
