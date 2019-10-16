@@ -45,6 +45,11 @@ _Note:_ For Windows users, open cmd as admin to run the command
 
 https://arunmichaeldsouza.com/blog/aliasing-module-paths-in-node-js
 
+# Tests
+
+- ./tests folder include the test environment and an emulation of mongodb (with a little seeder)
+- ./tests folder also include the mongoose check connection test
+
 # e2e tests vs unit tests ?
 
 e2e tests:
@@ -59,6 +64,11 @@ e2e tests:
 - Copy the .test path
 - Paste it in test-x
 - npm run test-x
+
+# Sonarqube
+
+- Sonarqube is integrate and configure for jest test and coverage in the project
+- Allow to show the coverage and quality of code with reviews
 
 # License
 

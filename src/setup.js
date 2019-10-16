@@ -23,20 +23,20 @@ function setupSessionEnvironment(app) {
     let sess;
 
     switch (process.env.NODE_ENV) {
-    case 'development':
-        sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: false, httpOnly: true };
-        break;
-    case 'staging':
-        sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: true, httpOnly: true };
-        break;
-    case 'production':
-        sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: true, httpOnly: true };
-        break;
-    case 'test':
-        sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: false, httpOnly: true };
-        break;
-    default:
-        throw new CustomError(EnvironmentError);
+        case 'development':
+            sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: false, httpOnly: true };
+            break;
+        case 'staging':
+            sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: true, httpOnly: true };
+            break;
+        case 'production':
+            sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: true, httpOnly: true };
+            break;
+        case 'test':
+            sess = { keys: [process.env.APPNAME_SESSION_SECRET], maxAge: cookieTTLOnClient, secure: false, httpOnly: true };
+            break;
+        default:
+            throw new CustomError(EnvironmentError);
     }
 
     app.use(cookieSession(sess));
@@ -44,11 +44,11 @@ function setupSessionEnvironment(app) {
 
 function setupProxyEnvironment(app) {
     switch (process.env.NODE_ENV) {
-    case 'production':
-        app.set('trust proxy', 1); // trust first proxy
-        break;
-    default:
-        break;
+        case 'production':
+            app.set('trust proxy', 1); // trust first proxy
+            break;
+        default:
+            break;
     }
 }
 
@@ -111,18 +111,10 @@ async function setupMongoose() {
     // Do not reload otherwise you will redefine it and you will get error on production package
     // moduleMongoose.loadModels(`${__dirname}/models`);
 }
-function setupRigorousRouter(app) {
-    rigorousRouter.init(app, appConfig.API_VERSION, `${__dirname}/routes`);
-
-    const router = rigorousRouter.getRouter();
-
-    app.use(router);
-}
 module.exports = {
     setupSessionEnvironment: app => setupSessionEnvironment(app),
     setupProxyEnvironment: app => setupProxyEnvironment(app),
     setupPassport: app => setupPassport(app),
     setupCORS: app => setupCORS(app),
     setupMongoose: async () => setupMongoose(),
-    setupRigorousRouter: app => setupRigorousRouter(app),
 };
