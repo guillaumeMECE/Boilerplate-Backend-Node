@@ -78,12 +78,9 @@ module.exports = {
     moduleNameMapper: {
         '$root(.*)$': '<rootDir>/src/$1',
         '$core(.*)$': '<rootDir>/src/core/$1',
-        '$config(.*)$': '<rootDir>/src/config/$1',
-        '$facades(.*)$': '<rootDir>/src/facades/$1',
         '$middlewares(.*)$': '<rootDir>/src/middlewares/$1',
         '$models(.*)$': '<rootDir>/src/models/$1',
         '$routes(.*)$': '<rootDir>/src/routes/$1',
-        '$validators(.*)$': '<rootDir>/src/validators/$1',
         '$tests(.*)$': '<rootDir>/tests/$1'
     },
 
